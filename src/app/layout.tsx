@@ -1,4 +1,6 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useState } from "react";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -22,14 +24,6 @@ const spaceGrotesk = Space_Grotesk({
   variable: '--font-space-grotesk',
   display: 'swap'
 });
-
-export const metadata: Metadata = {
-  title: "QuantumChain - MegaETH Quantum Computing",
-  description: "Secure quantum computing platform with ultra-fast MegaETH blockchain verification",
-  keywords: "quantum computing, MegaETH, blockchain, smart contracts, multi-wallet",
-  authors: [{ name: "QuantumChain Team" }],
-  viewport: "width=device-width, initial-scale=1",
-};
 
 export default function RootLayout({
   children,

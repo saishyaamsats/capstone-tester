@@ -127,6 +127,7 @@ export default function RegisterPage() {
   if (user) {
     return null;
   }
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
       {/* Animated background */}
@@ -168,7 +169,7 @@ export default function RegisterPage() {
             >
               <div className="relative">
                 <div className="absolute inset-0 bg-primary/20 rounded-2xl blur-xl" />
-                    Your quantum computations are protected with military-grade encryption and permanent MegaETH blockchain verification.
+                <div className="relative bg-primary rounded-2xl p-4">
                   <UserPlus className="h-10 w-10 text-white quantum-pulse" />
                 </div>
               </div>
