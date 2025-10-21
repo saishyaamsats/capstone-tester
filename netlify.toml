@@ -1,4 +1,5 @@
 # Netlify Configuration for QuantumChain Next.js App
+# NO SEPARATE BACKEND - All API routes become serverless functions
 
 [build]
   # Build command
@@ -21,6 +22,7 @@
   NPM_FLAGS = "--legacy-peer-deps"
 
 # Netlify Next.js Plugin Configuration
+# This automatically converts API routes to serverless functions
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
@@ -31,6 +33,8 @@
   status = 200
   force = false
 
+# API routes are automatically handled by @netlify/plugin-nextjs
+# They become serverless functions at /.netlify/functions/*
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
@@ -83,7 +87,11 @@
 [context.deploy-preview]
   command = "npm run build"
 
-# Functions directory (for Netlify Functions if needed)
+# Functions configuration (API routes become serverless functions)
 [functions]
-  directory = "netlify/functions"
+  # Directory is auto-managed by @netlify/plugin-nextjs
   node_bundler = "esbuild"
+  
+  # Increase timeout for quantum simulation functions
+  [functions."*"]
+    timeout = 26
