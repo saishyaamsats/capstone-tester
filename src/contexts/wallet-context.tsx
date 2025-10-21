@@ -37,8 +37,6 @@ declare global {
 
 // Token linking success handler
 const handleTokenLinkingSuccess = (address: string) => {
-  console.log('MegaETH tokens linked successfully for address:', address);
-  
   // Redirect to MegaETH testnet interface
   setTimeout(() => {
     window.open('https://testnet.megaeth.com/#2', '_blank', 'noopener,noreferrer');
@@ -81,7 +79,6 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
         const formattedBalance = formatEther(currentBalance);
         setBalance(formattedBalance);
       } catch (error: any) {
-        console.error("Error refreshing balance:", error);
         setError("Failed to refresh MegaETH balance. Please try again.");
       }
     }
@@ -152,8 +149,6 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
       // Handle successful token linking
       handleTokenLinkingSuccess(currentAddress);
     } catch (error: any) {
-      console.error("Error connecting wallet:", error);
-      
       if (error.code === 4001) {
         setError(`Connection cancelled. Please approve the connection in ${walletProvider?.name || 'your wallet'}.`);
       } else if (error.code === -32002) {
@@ -212,7 +207,6 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
           setConnectedWalletType(walletType);
         }
       } catch (error) {
-        console.error("Failed to initialize wallet:", error);
         if (typeof window !== "undefined") {
           localStorage.removeItem("wallet-connected");
           localStorage.removeItem("wallet-type");
@@ -265,7 +259,7 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
         walletEthereum.addEventListener("chainChanged", handleChainChanged);
       }
     } catch (error) {
-      console.warn('Failed to set up wallet event listeners:', error);
+      // Event listener setup failed, continue without listeners
     }
     
     return () => {
@@ -278,7 +272,7 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
           walletEthereum.removeEventListener("chainChanged", handleChainChanged);
         }
       } catch (error) {
-        console.warn('Failed to remove wallet event listeners:', error);
+        // Event listener removal failed, continue
       }
     };
   }, [connectWallet, disconnectWallet, provider]);

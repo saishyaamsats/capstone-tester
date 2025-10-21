@@ -369,7 +369,6 @@ export default function JobSubmissionForm({ onJobLogged }: JobSubmissionFormProp
       onJobLogged();
       
     } catch (error: any) {
-      console.error(error);
       
       let errorMessage = "Transaction failed.";
       

@@ -41,7 +41,6 @@ class EnhancedErrorBoundary extends React.Component<EnhancedErrorBoundaryProps, 
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('Enhanced ErrorBoundary caught an error:', error, errorInfo);
     this.setState({ errorInfo });
     
     // Enhanced error logging with advanced error handler
@@ -67,7 +66,9 @@ class EnhancedErrorBoundary extends React.Component<EnhancedErrorBoundaryProps, 
             category: enhancedError.category
           }
         })
-      }).catch(console.error);
+      }).catch(() => {
+        // Analytics logging failed, continue
+      });
     }
   }
 
@@ -92,7 +93,6 @@ class EnhancedErrorBoundary extends React.Component<EnhancedErrorBoundaryProps, 
       window.location.reload();
       
     } catch (recoveryError) {
-      console.error('Recovery failed:', recoveryError);
       this.setState({ isRecovering: false });
     }
   };
@@ -120,7 +120,6 @@ class EnhancedErrorBoundary extends React.Component<EnhancedErrorBoundaryProps, 
     };
     
     // In a real app, this would send to an error reporting service
-    console.log('Error reported:', errorDetails);
   };
 
   render() {

@@ -117,7 +117,6 @@ export default function JobList({ userRole, jobsLastUpdated, onTotalJobsChange }
       setJobs(allJobs);
       onTotalJobsChange(allJobs.length);
     } catch (e: any) {
-      console.error("Failed to fetch jobs:", e);
       setError(`Network connection error. Please check your wallet connection and try again.`);
       setJobs([]);
       onTotalJobsChange(0);

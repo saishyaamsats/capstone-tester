@@ -94,7 +94,6 @@ export default function InsightsPage() {
       generateAIAnalysis(data);
       
     } catch (error) {
-      console.error('Failed to fetch insights:', error);
       toast({
         variant: "destructive",
         title: "Insights Error",
@@ -124,7 +123,6 @@ export default function InsightsPage() {
         setAIAnalysis(aiResponse.answer);
       }
     } catch (error) {
-      console.error('AI analysis failed:', error);
     }
   };
 

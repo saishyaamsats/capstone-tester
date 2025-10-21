@@ -14,7 +14,6 @@ export class MegaETHUtils {
       const network = await provider.getNetwork();
       return Number(network.chainId) === MEGAETH_TESTNET_CONFIG.chainId;
     } catch (error) {
-      console.error('Failed to check network:', error);
       return false;
     }
   }

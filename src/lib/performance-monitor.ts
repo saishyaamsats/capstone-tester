@@ -21,7 +21,6 @@ class PerformanceMonitor {
   endTimer(name: string): PerformanceMetric | null {
     const startTime = this.activeTimers.get(name);
     if (!startTime) {
-      console.warn(`Timer '${name}' was not started`);
       return null;
     }
 
@@ -101,7 +100,6 @@ export async function timeAsync<T>(
     const metric = performanceMonitor.endTimer(name);
     
     if (metric && metric.duration > 1000) {
-      console.warn(`Slow operation detected: ${name} took ${metric.duration.toFixed(2)}ms`);
     }
     
     return result;

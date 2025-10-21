@@ -64,7 +64,6 @@ export async function GET(request: NextRequest) {
     }
 
   } catch (error) {
-    console.error('MegaETH API error:', error);
     return NextResponse.json(
       { 
         error: 'MegaETH API request failed',
@@ -137,7 +136,6 @@ export async function POST(request: NextRequest) {
     }
 
   } catch (error) {
-    console.error('MegaETH POST API error:', error);
     return NextResponse.json(
       { 
         error: 'MegaETH operation failed',

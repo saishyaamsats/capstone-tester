@@ -49,8 +49,6 @@ export function handleApiError(error: unknown): {
   timestamp: number;
   details?: string;
 } {
-  console.error('API Error:', error);
-
   if (error instanceof AppError) {
     return {
       message: error.message,
@@ -77,24 +75,7 @@ export function handleApiError(error: unknown): {
 }
 
 export function logError(error: unknown, context?: string) {
-  const timestamp = new Date().toISOString();
-  const contextStr = context ? `[${context}] ` : '';
-  
-  if (error instanceof AppError) {
-    console.error(`${timestamp} ${contextStr}AppError:`, {
-      message: error.message,
-      statusCode: error.statusCode,
-      isOperational: error.isOperational,
-      stack: error.stack
-    });
-  } else if (error instanceof Error) {
-    console.error(`${timestamp} ${contextStr}Error:`, {
-      message: error.message,
-      stack: error.stack
-    });
-  } else {
-    console.error(`${timestamp} ${contextStr}Unknown error:`, error);
-  }
+  // Error logging removed for production
 }
 
 export function createErrorResponse(error: unknown, defaultMessage: string = 'Internal server error') {

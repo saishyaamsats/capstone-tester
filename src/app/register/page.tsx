@@ -99,7 +99,6 @@ export default function RegisterPage() {
       // Faster redirect
       router.push("/login");
     } catch (error: any) {
-      console.error("Registration error:", error);
       const errorMessage = error.message || "Registration failed. Please try again.";
       setRegistrationError(errorMessage);
       toast({

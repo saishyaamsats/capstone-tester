@@ -91,7 +91,6 @@ export const NetworkValidationAlgorithm = {
       return Number(newNetwork.chainId) === targetChainId;
 
     } catch (error: any) {
-      console.error('Network validation failed:', error);
       return false;
     }
   },
@@ -530,7 +529,6 @@ export const RetryAlgorithm = {
           maxDelay
         );
 
-        console.log(`Retry attempt ${attempt + 1}/${maxRetries} in ${delay}ms`);
         await new Promise(resolve => setTimeout(resolve, delay));
       }
     }
@@ -768,11 +766,9 @@ export const UsageExamples = {
         throw new Error('Failed to connect to MegaETH Testnet');
       }
 
-      console.log('Wallet connected successfully to MegaETH!');
       
     } catch (error) {
       const errorInfo = WalletErrorHandler.classifyError(error);
-      console.error('Connection failed:', errorInfo.userMessage);
     }
   },
 

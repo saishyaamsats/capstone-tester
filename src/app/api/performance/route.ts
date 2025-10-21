@@ -32,7 +32,6 @@ export async function GET(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('Performance API error:', error);
     return NextResponse.json(
       { error: 'Failed to fetch performance data' },
       { status: 500 }
@@ -51,7 +50,6 @@ export async function DELETE(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('Performance clear error:', error);
     return NextResponse.json(
       { error: 'Failed to clear performance metrics' },
       { status: 500 }

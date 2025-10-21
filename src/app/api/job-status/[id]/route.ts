@@ -34,7 +34,6 @@ export async function GET(
     return NextResponse.json(response);
     
   } catch (error) {
-    console.error('Job status error:', error);
     return NextResponse.json(
       { error: 'Failed to get job status', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }

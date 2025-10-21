@@ -4,14 +4,6 @@ const nextConfig: NextConfig = {
   /* config options here */
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
-      },
-    },
   },
   typescript: {
     ignoreBuildErrors: true,
@@ -41,18 +33,15 @@ const nextConfig: NextConfig = {
   },
   env: {
     SERVICE_ACCOUNT_PRIVATE_KEY: process.env.SERVICE_ACCOUNT_PRIVATE_KEY,
-    MEGAETH_RPC_URL: process.env.MEGAETH_RPC_URL,
-    MEGAETH_EXPLORER_URL: process.env.MEGAETH_EXPLORER_URL,
+    MEGAETH_RPC_URL: process.env.MEGAETH_RPC_URL || 'https://testnet.megaeth.systems',
+    MEGAETH_EXPLORER_URL: process.env.MEGAETH_EXPLORER_URL || 'https://www.megaexplorer.xyz',
   },
   poweredByHeader: false,
-  // Add error handling for build process
-  onDemandEntries: {
-    maxInactiveAge: 25 * 1000,
-    pagesBufferLength: 2,
-  },
   // Performance optimizations
   swcMinify: true,
   compress: true,
+  // Output configuration for Netlify
+  output: 'standalone',
 };
 
 export default nextConfig;

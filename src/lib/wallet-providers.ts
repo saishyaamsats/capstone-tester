@@ -105,14 +105,12 @@ const safeGetEthereumProvider = () => {
       set(target, property, value) {
         // Prevent setting ethereum property to avoid conflicts
         if (property === 'ethereum') {
-          console.warn('Prevented ethereum property override to avoid conflicts');
           return true;
         }
         return Reflect.set(target, property, value);
       }
     });
   } catch (error) {
-    console.warn('Error accessing ethereum provider safely:', error);
     return null;
   }
 };

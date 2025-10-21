@@ -77,7 +77,6 @@ export default function WalletSelectionModal({
       setPendingWallet(null);
       onClose();
     } catch (error: any) {
-      console.error('Wallet connection failed:', error);
       setShowConfirmation(false);
       setPendingWallet(null);
     }

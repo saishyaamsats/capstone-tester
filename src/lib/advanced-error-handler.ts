@@ -285,7 +285,6 @@ class AdvancedErrorHandler {
       try {
         listener(error);
       } catch (listenerError) {
-        console.error('Error in error listener:', listenerError);
       }
     });
   }

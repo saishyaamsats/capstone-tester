@@ -59,7 +59,6 @@ export async function GET(request: NextRequest) {
     });
 
   } catch (error: any) {
-    console.error('Execution insights API error:', error);
     performanceMonitor.endTimer('execution_insights_fetch');
     
     return NextResponse.json(
@@ -108,7 +107,6 @@ export async function POST(request: NextRequest) {
     }
 
   } catch (error: any) {
-    console.error('Execution insights POST error:', error);
     return NextResponse.json(
       { 
         error: 'Failed to process insights request',

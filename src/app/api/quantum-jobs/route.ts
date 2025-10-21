@@ -42,7 +42,6 @@ export async function GET(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('Quantum jobs API error:', error);
     return NextResponse.json(
       { error: 'Failed to fetch quantum jobs' },
       { status: 500 }

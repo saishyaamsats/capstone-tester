@@ -56,7 +56,6 @@ export class BlockchainIntegration {
 
       return { txHash: tx.hash, jobId };
     } catch (error: any) {
-      console.error('Failed to log quantum job:', error);
       throw error;
     }
   }
@@ -96,7 +95,6 @@ export class BlockchainIntegration {
 
       return jobs;
     } catch (error) {
-      console.error('Failed to fetch job history:', error);
       return [];
     }
   }

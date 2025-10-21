@@ -172,7 +172,6 @@ export default function BlockchainErrorRecovery({ error, onRecovery }: Blockchai
       onRecovery?.();
       
     } catch (error) {
-      console.error('Recovery failed:', error);
       toast({
         variant: "destructive",
         title: "Recovery Failed",

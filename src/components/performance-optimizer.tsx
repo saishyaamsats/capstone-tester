@@ -45,7 +45,6 @@ export default function PerformanceOptimizer() {
     const observer = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
         if (entry.entryType === 'navigation') {
-          console.log('Navigation timing:', entry);
         }
       }
     });

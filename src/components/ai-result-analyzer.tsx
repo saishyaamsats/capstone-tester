@@ -68,7 +68,6 @@ export default function AIResultAnalyzer({ results, onClose }: AIResultAnalyzerP
       });
 
     } catch (error: any) {
-      console.error('AI analysis failed:', error);
       toast({
         variant: "destructive",
         title: "Analysis Error",

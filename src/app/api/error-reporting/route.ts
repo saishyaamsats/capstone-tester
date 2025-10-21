@@ -57,7 +57,6 @@ export async function POST(request: NextRequest) {
 
     // Log to console for development
     if (process.env.NODE_ENV === 'development') {
-      console.log('Error reported:', errorReport);
     }
 
     // In production, you would send this to an error tracking service
@@ -71,7 +70,6 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('Error reporting API failed:', error);
     return NextResponse.json(
       { error: 'Failed to submit error report' },
       { status: 500 }
@@ -130,7 +128,6 @@ export async function GET(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('Error reporting GET API failed:', error);
     return NextResponse.json(
       { error: 'Failed to fetch error reports' },
       { status: 500 }

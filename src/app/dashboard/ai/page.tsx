@@ -185,7 +185,6 @@ export default function AIPage() {
       setMessages(prev => [...prev, aiMessage]);
 
     } catch (error: any) {
-      console.error('AI request failed:', error);
       
       const errorMessage: AIMessage = {
         id: `error_${Date.now()}`,

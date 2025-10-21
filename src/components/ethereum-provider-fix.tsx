@@ -25,16 +25,13 @@ export default function EthereumProviderFix() {
           },
           set(value) {
             // Log attempts to override but don't actually set
-            console.warn('Prevented ethereum provider override to avoid conflicts');
             return true;
           },
           configurable: false,
           enumerable: true
         });
 
-        console.log('✅ Ethereum provider conflict prevention activated');
       } catch (error) {
-        console.warn('Could not set up ethereum provider protection:', error);
       }
     };
 

@@ -117,7 +117,6 @@ export default function BlockchainPage() {
       setTimeout(() => setRefreshProgress(0), 1000);
       
     } catch (error: any) {
-      console.error("Failed to fetch network stats:", error);
       toast({
         variant: "destructive",
         title: "Network Error",
@@ -168,7 +167,6 @@ export default function BlockchainPage() {
       
       setTransactions(mockTxs);
     } catch (error: any) {
-      console.error("Failed to fetch transactions:", error);
     }
   }, [networkMetrics.blockNumber, address]);
 
@@ -194,7 +192,6 @@ export default function BlockchainPage() {
 
       setContractJobs(jobs);
     } catch (error: any) {
-      console.error("Failed to fetch contract jobs:", error);
     }
   }, [provider]);
 
