@@ -118,7 +118,6 @@ export default function AdvancedErrorDisplay({
       }, 1000);
       
     } catch (retryError) {
-      console.error('Retry failed:', retryError);
       setRetryCount(prev => prev + 1);
       
       toast({
