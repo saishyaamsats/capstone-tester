@@ -16,24 +16,27 @@ export default function Home() {
     setMounted(true);
   }, []);
 
-  const handleRedirect = useCallback((path: string) => {
-    if (redirecting) return;
-    console.log(`Redirecting to: ${path}`);
-    setRedirecting(true);
-    router.replace(path);
-  }, [router, redirecting]);
+  const handleRedirect = (path: string) => {
+    router.push(path);
+  };
 
   useEffect(() => {
-    if (mounted && !loading && !redirecting) {
+    if (!loading) {
       if (user) {
-        console.log("User authenticated, redirecting to dashboard");
-        handleRedirect("/dashboard");
+        router.push("/dashboard");
       } else {
-        console.log("No user found, redirecting to login");
-        handleRedirect("/login");
+        router.push("/login");
       }
+    } else {
+      const timeout = setTimeout(() => {
+        if (loading) {
+          router.push("/login");
+        }
+      }, 3000);
+
+      return () => clearTimeout(timeout);
     }
-  }, [mounted, loading, user, handleRedirect, redirecting]);
+  }, [user, loading, router]);
 
   // Enhanced timeout with better error handling
   useEffect(() => {
