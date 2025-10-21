@@ -238,6 +238,17 @@ export default function ResultsPage() {
           </CardContent>
         </Card>
       </motion.div>
+      
+      {/* Polling Status Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.15 }}
+        className="flex items-center justify-end gap-2 text-xs text-muted-foreground"
+      >
+        <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+        <span>Auto-updating every 5 seconds</span>
+      </motion.div>
 
       {/* Results Grid */}
       <motion.div
