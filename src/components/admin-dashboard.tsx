@@ -18,7 +18,6 @@ export default function AdminDashboard({ totalJobs }: AdminDashboardProps) {
       const users = storedUsers ? JSON.parse(storedUsers) : HARDCODED_USERS;
       setTotalUsers(users.length);
     } catch (error) {
-      console.error("Failed to parse users from localStorage", error);
       setTotalUsers(HARDCODED_USERS.length);
     }
   }, []);

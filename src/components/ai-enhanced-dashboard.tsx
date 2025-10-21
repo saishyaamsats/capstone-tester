@@ -82,7 +82,6 @@ export default function AIEnhancedDashboard() {
 
       setInsights(personalizedInsights);
     } catch (error) {
-      console.error('Failed to generate insights:', error);
     } finally {
       setIsLoading(false);
     }

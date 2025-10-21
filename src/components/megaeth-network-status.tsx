@@ -42,7 +42,6 @@ export default function MegaETHNetworkStatus() {
       setStatus(data);
       setLastUpdated(Date.now());
     } catch (error) {
-      console.error('Failed to fetch MegaETH status:', error);
       setStatus({
         isOnline: false,
         blockNumber: 0,

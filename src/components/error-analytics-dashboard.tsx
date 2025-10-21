@@ -39,7 +39,6 @@ export default function ErrorAnalyticsDashboard() {
       const data = await response.json();
       setAnalytics(data.analytics);
     } catch (error) {
-      console.error('Failed to fetch error analytics:', error);
     } finally {
       setIsLoading(false);
     }

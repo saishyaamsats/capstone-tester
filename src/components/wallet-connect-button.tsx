@@ -89,7 +89,6 @@ export default function WalletConnectButton() {
       });
       setShowWalletModal(false);
     } catch (error: any) {
-      console.error("Connection failed:", error);
     } finally {
       setSelectedWallet(null);
     }
