@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(JSON.parse(storedUser));
       }
     } catch (error) {
-      console.error("Failed to parse user from localStorage", error);
+      // Failed to parse stored user data
     } finally {
       setLoading(false);
     }
@@ -64,16 +64,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           country: foundUser.country
         };
         
-        console.log("User authenticated successfully:", userToStore.email);
         localStorage.setItem("quantum-user", JSON.stringify(userToStore));
         setUser(userToStore);
         return userToStore;
       }
       
-      console.log("Authentication failed for:", credentials.email);
       return null;
     } catch (error) {
-      console.error("Login error:", error);
       throw error;
     }
   }, []);
@@ -101,7 +98,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       return newUser;
     } catch (error) {
-      console.error("Registration failed:", error);
       throw error;
     }
   }, []);
