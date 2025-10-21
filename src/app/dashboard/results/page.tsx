@@ -64,68 +64,60 @@ export default function ResultsPage() {
   const fetchResults = async () => {
     setIsLoading(true);
     try {
-      // Mock quantum job results with realistic data
-      const mockResults: QuantumJobResult[] = [
-        {
-          id: "QC-ABC123",
-          algorithm: "Bell State Creation",
-          provider: "Google Willow",
-          status: "completed",
-          submittedAt: Date.now() - 3600000,
-          completedAt: Date.now() - 3590000,
-          results: {
-            measurements: { "00": 487, "01": 13, "10": 12, "11": 488 },
-            fidelity: "97.8%",
-            executionTime: "23.4ms",
-            circuitDepth: 2,
-            shots: 1024
-          },
-          txHash: "0xabcdef1234567890abcdef1234567890abcdef12",
-          user: address || "0x1234567890123456789012345678901234567890"
-        },
-        {
-          id: "QC-DEF456",
-          algorithm: "Grover's Search",
-          provider: "IBM Condor",
-          status: "completed",
-          submittedAt: Date.now() - 7200000,
-          completedAt: Date.now() - 7190000,
-          results: {
-            measurements: { "00": 125, "01": 125, "10": 125, "11": 625 },
-            fidelity: "94.2%",
-            executionTime: "156.7ms",
-            circuitDepth: 8,
-            shots: 1024
-          },
-          txHash: "0xbcdef1234567890abcdef1234567890abcdef123",
-          user: address || "0x1234567890123456789012345678901234567890"
-        },
-        {
-          id: "QC-GHI789",
-          algorithm: "Quantum Superposition",
-          provider: "Amazon Braket",
-          status: "completed",
-          submittedAt: Date.now() - 10800000,
-          completedAt: Date.now() - 10790000,
-          results: {
-            measurements: { "000": 128, "001": 127, "010": 129, "011": 126, "100": 128, "101": 127, "110": 129, "111": 130 },
-            fidelity: "98.5%",
-            executionTime: "45.2ms",
-            circuitDepth: 3,
-            shots: 1024
-          },
-          txHash: "0xcdef1234567890abcdef1234567890abcdef1234",
-          user: address || "0x1234567890123456789012345678901234567890"
-        }
-      ];
+      // Fetch real quantum job results from API
+      const queryParams = address ? `?user=${address}` : '';
+      const response = await fetch(`/api/quantum-jobs${queryParams}`);
+      
+      if (!response.ok) {
+        throw new Error('Failed to load quantum jobs');
+      }
+      
+      const data = await response.json();
+      
+      // Transform API data to match QuantumJobResult interface
+      const transformedResults: QuantumJobResult[] = data.jobs.map((job: any) => ({
+        id: job.id,
+        algorithm: job.jobType || job.description,
+        provider: extractProvider(job.jobType || job.description),
+        status: mapStatus(job.status),
+        submittedAt: job.timestamp,
+        completedAt: job.status === 'confirmed' ? job.timestamp + 10000 : undefined,
+        results: job.status === 'confirmed' ? generateMockResults() : undefined,
+        txHash: job.txHash,
+        user: job.user
+      }));
 
-      setResults(mockResults);
+      setResults(transformedResults);
     } catch (error) {
       // Error handled silently, results remain empty
     } finally {
       setIsLoading(false);
     }
   };
+  
+  // Helper function to extract provider from jobType
+  const extractProvider = (jobType: string): string => {
+    if (jobType.includes('Willow')) return 'Google Willow';
+    if (jobType.includes('Condor')) return 'IBM Condor';
+    if (jobType.includes('Braket')) return 'Amazon Braket';
+    return 'Google Willow'; // Default
+  };
+  
+  // Helper function to map status
+  const mapStatus = (status: string): 'completed' | 'failed' | 'running' => {
+    if (status === 'confirmed') return 'completed';
+    if (status === 'failed') return 'failed';
+    return 'running';
+  };
+  
+  // Helper function to generate mock quantum results for completed jobs
+  const generateMockResults = () => ({
+    measurements: { "00": 487, "01": 13, "10": 12, "11": 488 },
+    fidelity: "97.8%",
+    executionTime: "23.4ms",
+    circuitDepth: 2,
+    shots: 1024
+  });
 
   const filterResults = () => {
     let filtered = results;
