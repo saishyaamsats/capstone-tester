@@ -72,7 +72,6 @@ export async function POST(request: NextRequest) {
     
     // Start quantum execution simulation
     executeQuantumJob(jobId, jobData).catch(error => {
-      console.error(`Job ${jobId} execution failed:`, error);
       const failedJob = jobs.get(jobId);
       if (failedJob) {
         failedJob.status = "failed";
@@ -89,7 +88,6 @@ export async function POST(request: NextRequest) {
     });
     
   } catch (error) {
-    console.error('Job submission error:', error);
     return NextResponse.json(
       { error: 'Failed to submit job', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
@@ -131,10 +129,7 @@ async function executeQuantumJob(jobId: string, jobData: JobSubmission) {
     job.results = mockResults;
     jobs.set(jobId, { ...job });
     
-    console.log(`Job ${jobId} completed successfully in ${job.completedAt - job.submittedAt}ms`);
-    
   } catch (error) {
-    console.error(`Job ${jobId} failed:`, error);
     job.status = "failed";
     job.error = error instanceof Error ? error.message : "Quantum execution failed";
     job.completedAt = Date.now();
