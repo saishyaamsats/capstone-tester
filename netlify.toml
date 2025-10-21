@@ -1,0 +1,89 @@
+# Netlify Configuration for QuantumChain Next.js App
+
+[build]
+  # Build command
+  command = "npm run build"
+
+  # Publish directory (Next.js builds to .next)
+  publish = ".next"
+
+  # Base directory for the build
+  base = "."
+
+[build.environment]
+  # Node.js version
+  NODE_VERSION = "20.x"
+
+  # Next.js configuration
+  NEXT_TELEMETRY_DISABLED = "1"
+
+  # Build flags
+  NPM_FLAGS = "--legacy-peer-deps"
+
+# Netlify Next.js Plugin Configuration
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Redirect rules for Next.js client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Development context settings
+[context.development]
+  command = "npm run build"
+
+[context.development.environment]
+  NODE_ENV = "development"
+
+# Production context settings
+[context.production]
+  command = "npm run build"
+
+[context.production.environment]
+  NODE_ENV = "production"
+
+# Branch deploy context
+[context.branch-deploy]
+  command = "npm run build"
+
+# Deploy preview context
+[context.deploy-preview]
+  command = "npm run build"
+
+# Functions directory (for Netlify Functions if needed)
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
