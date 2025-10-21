@@ -24,7 +24,6 @@ export default function DashboardLayout({
 
   React.useEffect(() => {
     if (mounted && !loading && !user) {
-      console.log("No user found, redirecting to login");
       setRedirecting(true);
       router.replace("/login");
     }
@@ -35,7 +34,6 @@ export default function DashboardLayout({
     if (loading) {
       const timeout = setTimeout(() => {
         if (!user && mounted && !redirecting) {
-          console.log("Loading timeout reached, redirecting to login");
           setRedirecting(true);
           router.replace("/login");
         }
@@ -50,7 +48,6 @@ export default function DashboardLayout({
     if (mounted && !loading && !user) {
       const authCheck = setTimeout(() => {
         if (!user && !redirecting) {
-          console.log("Auth check failed, forcing redirect");
           setRedirecting(true);
           router.replace("/login");
         }

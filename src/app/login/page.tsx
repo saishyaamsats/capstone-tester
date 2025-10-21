@@ -87,7 +87,6 @@ export default function LoginPage() {
         form.setFocus("email");
       }
     } catch (error: any) {
-      console.error("Login error:", error);
       const errorMessage = error.message || "Login failed. Please check your connection and try again.";
       setLoginError(errorMessage);
       
