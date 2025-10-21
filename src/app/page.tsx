@@ -43,7 +43,6 @@ export default function Home() {
     if (mounted) {
       const timeout = setTimeout(() => {
         if (!user && !loading && !redirecting) {
-          console.log("Timeout reached, forcing redirect to login");
           handleRedirect("/login");
         }
       }, 2000); // Reduced timeout for better UX
