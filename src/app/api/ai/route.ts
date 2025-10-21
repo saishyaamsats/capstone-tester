@@ -80,7 +80,6 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error: any) {
-    console.error('SpikingBrain AI error:', error);
     performanceMonitor.endTimer('ai_query_processing');
     
     const enhancedError = advancedErrorHandler.enhanceError(error, ErrorCategory.SYSTEM, {
@@ -162,7 +161,6 @@ export async function GET(request: NextRequest) {
     }
 
   } catch (error: any) {
-    console.error('SpikingBrain AI GET error:', error);
     return NextResponse.json(
       { error: 'Failed to process AI request' },
       { status: 500 }
