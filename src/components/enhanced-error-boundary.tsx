@@ -66,7 +66,9 @@ class EnhancedErrorBoundary extends React.Component<EnhancedErrorBoundaryProps, 
             category: enhancedError.category
           }
         })
-      }).catch(console.error);
+      }).catch(() => {
+        // Analytics logging failed, continue
+      });
     }
   }
 
