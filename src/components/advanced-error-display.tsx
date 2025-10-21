@@ -154,6 +154,19 @@ export default function AdvancedErrorDisplay({
   const CategoryIcon = getCategoryIcon(error.category);
   const SeverityIcon = config.icon;
 
+  const getSeverityIconBgClass = (severity: ErrorSeverity) => {
+    switch (severity) {
+      case ErrorSeverity.CRITICAL:
+        return "p-2 rounded-lg bg-gradient-to-br from-red-500/20 to-red-600/10";
+      case ErrorSeverity.HIGH:
+        return "p-2 rounded-lg bg-gradient-to-br from-orange-500/20 to-orange-600/10";
+      case ErrorSeverity.MEDIUM:
+        return "p-2 rounded-lg bg-gradient-to-br from-yellow-500/20 to-yellow-600/10";
+      default:
+        return "p-2 rounded-lg bg-gradient-to-br from-blue-500/20 to-blue-600/10";
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -165,7 +178,7 @@ export default function AdvancedErrorDisplay({
         <CardHeader className="pb-4">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
-              <div className={`p-2 rounded-lg bg-gradient-to-br from-${config.textColor.split('-')[1]}-500/20 to-${config.textColor.split('-')[1]}-600/10`}>
+              <div className={getSeverityIconBgClass(error.severity)}>
                 <SeverityIcon className={`h-6 w-6 ${config.textColor}`} />
               </div>
               <div>
