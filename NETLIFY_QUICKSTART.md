@@ -1,10 +1,19 @@
 # Quick Start: Deploy to Netlify in 5 Minutes
+## NO BACKEND REQUIRED - Pure Serverless Deployment
 
-The fastest way to get QuantumChain running on Netlify.
-
-## One-Click Deploy
+**Important:** This application requires **NO separate backend server**. All API routes automatically become serverless functions on Netlify. Everything runs on Netlify's infrastructure - no database, no server, no maintenance!
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start)
+
+## What You Get
+
+✅ **Static pages** served from global CDN (lightning fast)
+✅ **API routes** become serverless functions (auto-scaling)
+✅ **No backend server** to manage or pay for
+✅ **No database** required (uses in-memory storage for demo)
+✅ **Free hosting** on Netlify's free tier
+✅ **Automatic HTTPS** with SSL certificate
+✅ **Global CDN** for worldwide performance
 
 ## Manual Quick Deploy (5 Steps)
 
