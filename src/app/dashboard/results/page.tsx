@@ -121,7 +121,7 @@ export default function ResultsPage() {
 
       setResults(mockResults);
     } catch (error) {
-      console.error('Failed to fetch results:', error);
+      // Error handled silently, results remain empty
     } finally {
       setIsLoading(false);
     }
