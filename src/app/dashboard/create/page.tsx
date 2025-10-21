@@ -244,7 +244,6 @@ export default function CreatePage() {
       setSelectedPreset(null);
       
     } catch (error: any) {
-      console.error(error);
       
       let errorMessage = "Job submission failed.";
       
