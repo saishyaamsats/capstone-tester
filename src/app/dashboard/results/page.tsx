@@ -54,15 +54,28 @@ export default function ResultsPage() {
   const [filterStatus, setFilterStatus] = useState<string>("all");
 
   useEffect(() => {
-    fetchResults();
+    fetchResults(true);
   }, []);
+  
+  // Add polling for real-time updates
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchResults(false); // Poll without loading state
+    }, 5000); // Poll every 5 seconds
+    
+    return () => {
+      clearInterval(interval);
+    };
+  }, [address]);
 
   useEffect(() => {
     filterResults();
   }, [results, searchTerm, filterProvider, filterStatus]);
 
-  const fetchResults = async () => {
-    setIsLoading(true);
+  const fetchResults = async (showLoading = true) => {
+    if (showLoading) {
+      setIsLoading(true);
+    }
     try {
       // Fetch real quantum job results from API
       const queryParams = address ? `?user=${address}` : '';
