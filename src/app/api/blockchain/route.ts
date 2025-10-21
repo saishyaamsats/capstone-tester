@@ -54,7 +54,6 @@ export async function GET(request: NextRequest) {
     }
 
   } catch (error: any) {
-    console.error('Blockchain API error:', error);
     performanceMonitor.endTimer('blockchain_api_get');
     
     const enhancedError = advancedErrorHandler.enhanceError(error, ErrorCategory.BLOCKCHAIN, {
@@ -119,7 +118,6 @@ export async function POST(request: NextRequest) {
     }
 
   } catch (error: any) {
-    console.error('Blockchain API POST error:', error);
     performanceMonitor.endTimer('blockchain_api_post');
     
     const enhancedError = advancedErrorHandler.enhanceError(error, ErrorCategory.BLOCKCHAIN, {
