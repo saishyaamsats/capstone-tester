@@ -42,7 +42,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(debugInfo);
 
   } catch (error) {
-    console.error('Debug API error:', error);
     return NextResponse.json(
       { 
         error: 'Debug information unavailable',
@@ -98,7 +97,6 @@ export async function POST(request: NextRequest) {
     }
 
   } catch (error) {
-    console.error('Debug action error:', error);
     return NextResponse.json(
       { 
         error: 'Debug action failed',

@@ -45,7 +45,6 @@ export async function GET(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('System metrics error:', error);
     return NextResponse.json(
       { 
         error: 'Failed to fetch system metrics',
@@ -95,7 +94,6 @@ export async function POST(request: NextRequest) {
     }
 
   } catch (error) {
-    console.error('System action error:', error);
     return NextResponse.json(
       { error: 'Failed to execute system action' },
       { status: 500 }
