@@ -43,8 +43,10 @@ export function useWebSocket(url: string, options: UseWebSocketOptions = {}) {
     };
   }, [url]);
 
-  const sendMessage = (message: any) => {
-    console.log('Sending message:', message);
+  const sendMessage = (message: string) => {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(message);
+    }
   };
 
   const connect = () => {
